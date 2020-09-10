@@ -414,7 +414,7 @@
 
                     </div>
                                       <hr>
-                    <!-- <h2>TAGIHAN</h2>
+                  <h2>TAGIHAN</h2>
 
                     <div class="row">
 
@@ -423,11 +423,9 @@
                             <div class="form-group row">
 
                                 <div class="col-md-12">
-
                                     <label for="tag_bln_ini">Tagihan Bulan Ini :</label>
-
-                                    <input type="text" class="form-control" name="tag_bln_ini" id="tag_bln_ini" placeholder="Tagihan bulan ini" readonly>
-
+                                    <h3>Rp <span id="tag_bln_ini_sep">0</span></h3>
+                                    <input type="hidden" class="form-control" name="tag_bln_ini" id="tag_bln_ini" placeholder="Tagihan bulan ini" readonly>
                                     @error('tag_bln_ini') <span class="text-danger">{{ $message }}</span>@enderror
 
                                 </div>
@@ -443,9 +441,8 @@
                                 <div class="col-md-12">
 
                                     <label for="estimasi_tag">Estimasi Tagihan : </label>
-
-                                    <input type="text" class="form-control" name="estimasi_tag" id="estimasi_tag" placeholder="Estimasi tagihan" readonly>
-
+                                    <h3>Rp <span id="estimasi_tag_sep">0</span></h3>
+                                    <input type="hidden" class="form-control" name="estimasi_tag" id="estimasi_tag" placeholder="Estimasi tagihan" readonly>
                                     @error('estimasi_tag') <span class="text-danger">{{ $message }}</span>@enderror
 
                                 </div>
@@ -454,15 +451,15 @@
 
                         </div>
 
-                    </div> -->
+                    </div>
 
                     <div class="form-group row">
 
                         <div class="col-md-12">
 
-                            <label for="harga">Penambahan Harga <span class="text-danger">*harga ini merupakan penambahan biaya abonemen perbulan dari abonemen lama</span></label>
-
-                            <input type="text" class="form-control" name="price" id="price" placeholder="Harga" readonly>
+                            <label for="harga">Penambahan Harga <small class="text-danger">*harga ini merupakan penambahan biaya abonemen perbulan dari abonemen lama (sebelum ppn)</small></label>
+                            <h3>Rp <span id="price_sep">0</span></h3>
+                            <input type="hidden" class="form-control" name="price" id="price" placeholder="Harga" readonly>
 
                             @error('harga') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -555,6 +552,19 @@
 
     <script type="text/javascript">
 
+        function numberFormat(nStr) {
+            // return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+              x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+
         function getNumber(){
 
             var nomor_hp = $('#nomor_hp').val();
@@ -580,30 +590,31 @@
                         'nomor_hp' : nomor_hp
 
                     },
-
+                    // beforeSend:function(){
+                    //     $('body').loading();
+                    // },
+                    // complete:function(){
+                    //     $('body').loading('stop');
+                    // },
                     success:function(res){
 
                         if(res.status == 200){
-
                             $('#nama_pelanggan').val(res.data.nama)
-
                             // $('#email_pelanggan').val('dummy');
-
+                            var selisih  = res.data.harga * 1.1;
+                            var estimasi_tag = res.data.tagihan + parseInt((selisih.toFixed(0)));
+                            console.log(estimasi_tag);
                             $('#nomor_inet').val(res.data.nd_internet)
-
                             $('#cur_speed').val(res.data.speed)
-
                             $('#price').val(res.data.harga)
-
+                            $('#price_sep').html(numberFormat(res.data.harga))
                             $("#cwitel").val(res.data.cwitel)
-
                             $('#up_to_speed').val(res.data.up_speed)
-
-                            $('#tag_bln_ini').val(res.data.abon_existing)
-
-                            $("#estimasi_tag").val(res.data.harga_paket)
+                            $('#tag_bln_ini').val(res.data.tagihan)
+                            $('#tag_bln_ini_sep').html(numberFormat(res.data.tagihan))
+                            $("#estimasi_tag").val(estimasi_tag)
+                            $("#estimasi_tag_sep").html(numberFormat(estimasi_tag))
                             $("#nama_paket").val(res.data.penawaran)
-
                         }else{
 
                             alert(res.message);
@@ -622,8 +633,6 @@
 
             }
 
-            
-
         }
 
 
@@ -634,15 +643,7 @@
 
             var price = $('#price').val();
 
-            $("#fill").text('Dengan mengakses dan/atau mengisi form pada halaman situs ini, Saya menyatakan bahwa telah menerima, membaca, memahami dan menyetujui penawaran dari Telkom Indonesia untuk melakukan upgrade paket Indihome ke kecepatan '+upgrade+'bps dengan biaya tambahan sebesar Rp. '+numberWithCommas(price)+' (belum termasuk ppn). Segala risiko terkait biaya tagihan di luar kesepakatan ini sepenuhnya menjadi tanggung jawab saya.');
-
-        }
-
-
-
-        function numberWithCommas(x) {
-
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            $("#fill").text('Dengan mengakses dan/atau mengisi form pada halaman situs ini, Saya menyatakan bahwa telah menerima, membaca, memahami dan menyetujui penawaran dari Telkom Indonesia untuk melakukan upgrade paket Indihome ke kecepatan '+upgrade+'bps dengan biaya tambahan sebesar Rp. '+numberFormat(price)+' (belum termasuk ppn). Segala risiko terkait biaya tagihan di luar kesepakatan ini sepenuhnya menjadi tanggung jawab saya.');
 
         }
 

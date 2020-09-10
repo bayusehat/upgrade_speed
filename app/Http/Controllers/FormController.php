@@ -61,7 +61,8 @@ class FormController extends Controller
                     'price'           => $request->input('price'),
                     'cwitel'          => $request->input('cwitel'),
                     'nomor_hp_alt'    => $request->input('nomor_hp_alt'),
-                    'nama_paket'      => $request->input('nama_paket')
+                    'nama_paket'      => $request->input('nama_paket'),
+                    'kcontact'        => 'AOSF;SPXTH01;'.$request->input('nama_pelanggan').';'.$request->input('nomor_hp').';'.$request->input('up_to_speed').';selisih '.$request->input('price')
                 ];
 
                 $insert = DB::table('upspeed_new')->insert($data);
