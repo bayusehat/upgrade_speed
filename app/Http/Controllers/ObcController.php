@@ -27,7 +27,7 @@ class ObcController extends Controller
                     LEFT JOIN AREAS D ON A.CWITEL = D.CWITEL 
                     LEFT JOIN UPSPEED_MASTER F ON A.NOMOR_INET = F.ND_INTERNET
                     LEFT JOIN OFFERS G ON F.OFFER_ID = G.ID
-                    LEFT JOIN SPEEDS E ON D.SPEED_ID = E.ID
+                    LEFT JOIN SPEEDS E ON G.SPEED_ID = E.ID
                 WHERE ID_UPSPEED = $id");
         $data = [
             'title' => 'Edit OBC',

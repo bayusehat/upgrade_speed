@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Route;
     Route::get('/','FormController@index');
     Route::post('/register','FormController@register');
     Route::post('/getnumber','FormController@getNumber');
+
+    //Minipack
+    Route::get('/minipack','FormMinipackController@index');
+    Route::get('/mola','FormMinipackController@mola');
+    Route::get('/myih','FormMinipackController@myih');
+    Route::post('/register_minipack','FormMinipackController@register');
+    Route::post('/getnumber_minipack','FormMinipackController@getNumber');
 // });
 Route::get('/login','LoginController@login');
 Route::post('/dologin','LoginController@doLogin');

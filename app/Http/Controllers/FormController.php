@@ -81,9 +81,12 @@ class FormController extends Controller
         $nomor_hp = $request->input('nomor_hp');
 
         $query = DB::select("
-        SELECT A.*, B.PENAWARAN, C.SPEED_S UP_SPEED, B.PRICE - A.ABONEMEN HARGA FROM(
-            SELECT * FROM HP A LEFT JOIN UPSPEED_MASTER B ON A.ND_INTERNET = B.ND_INTERNET WHERE B.ND_INTERNET IS NOT NULL AND A.HP LIKE '%$nomor_hp%'
-            ) A LEFT JOIN OFFERS B ON A.OFFER_ID = B.ID
+        SELECT A.*, B.PENAWARAN, C.SPEED_S UP_SPEED, B.PRICE + A.HARGA_ADDON - A.ABONEMEN HARGA FROM(
+            SELECT A.*,B.*,C.ADDON, CASE WHEN C.PRICE IS NOT NULL THEN C.PRICE ELSE 0 END HARGA_ADDON FROM HP A 
+                LEFT JOIN UPSPEED_MASTER B ON A.ND_INTERNET = B.ND_INTERNET
+                LEFT JOIN ADDONS C ON B.ADDON_ID = C.ID 
+                WHERE B.ND_INTERNET IS NOT NULL AND A.HP LIKE '%$nomor_hp%'
+        ) A LEFT JOIN OFFERS B ON A.OFFER_ID = B.ID
             LEFT JOIN SPEEDS C ON B.SPEED_ID = C.ID
         ");
 
@@ -128,13 +131,13 @@ class FormController extends Controller
         return response($response);
     }
 
-    public function showuser()
-    {
-        $query = DB::select("SELECT * FROM UPSPEED_NEW");
-        foreach ($query as $i => $v) {
-            $update_kcontact = DB::table('upspeed_new')->where('id_upspeed',$v->id_upspeed)->update([
-                'kcontact' => 'AOSF;SPXTH01;'.$v->nama_pelanggan.';'.$v->nomor_hp.';'.$v->up_to_speed.';selisih '.$v->price
-            ]);
-        }
-    }
+    // public function showuser()
+    // {
+    //     $query = DB::select("SELECT * FROM UPSPEED_NEW");
+    //     foreach ($query as $i => $v) {
+    //         $update_kcontact = DB::table('upspeed_new')->where('id_upspeed',$v->id_upspeed)->update([
+    //             'kcontact' => 'AOSF;SPXTH01;'.$v->nama_pelanggan.';'.$v->nomor_hp.';'.$v->up_to_speed.';selisih '.$v->price
+    //         ]);
+    //     }
+    // }
 }

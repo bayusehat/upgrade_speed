@@ -10,7 +10,7 @@
 
   <head>
 
-    <title>Upgrade Speed</title>
+    <title>Indihome - Upgrade Speed</title>
 
     <meta charset="utf-8">
 
