@@ -423,7 +423,7 @@
                             <div class="form-group row">
 
                                 <div class="col-md-12">
-                                    <label for="tag_bln_ini">Tagihan Bulan Ini :</label>
+                                    <label for="tag_bln_ini">Tagihan Bulan <span id="bulan_tagihan"></span> :</label>
                                     <h3>Rp <span id="tag_bln_ini_sep">0</span></h3>
                                     <input type="hidden" class="form-control" name="tag_bln_ini" id="tag_bln_ini" placeholder="Tagihan bulan ini" readonly>
                                     @error('tag_bln_ini') <span class="text-danger">{{ $message }}</span>@enderror
@@ -615,6 +615,7 @@
                             $("#estimasi_tag").val(estimasi_tag)
                             $("#estimasi_tag_sep").html(numberFormat(estimasi_tag))
                             $("#nama_paket").val(res.data.penawaran)
+                            $("#bulan_tagihan").html(bulanTagihan(res.data.bulan_tagihan))
                         }else{
 
                             alert(res.message);
@@ -645,6 +646,38 @@
 
             $("#fill").text('Dengan mengakses dan/atau mengisi form pada halaman situs ini, Saya menyatakan bahwa telah menerima, membaca, memahami dan menyetujui penawaran dari Telkom Indonesia untuk melakukan upgrade paket Indihome ke kecepatan '+upgrade+'bps dengan biaya tambahan sebesar Rp. '+numberFormat(price)+' (belum termasuk ppn). Segala risiko terkait biaya tagihan di luar kesepakatan ini sepenuhnya menjadi tanggung jawab saya.');
 
+        }
+
+        function bulanTagihan(x){
+          var bulan;
+          switch (x){
+            case '01':
+              bulan = 'Januari';break;
+            case '02':
+              bulan = 'Februari';break;
+            case '03':
+              bulan = 'Maret';break;
+            case '04':
+              bulan = 'April';break;
+            case '05':
+              bulan = 'Mei';break;
+            case '06':
+              bulan = 'Juni';break;
+            case '07':
+              bulan = 'Juli';break;
+            case '08':
+              bulan = 'Agustus';break;
+            case '09':
+              bulan = 'September';break;
+            case '10':
+              bulan = 'Oktober';break;
+            case '11':
+              bulan = 'November';break;
+            case '12':
+              bulan = 'Desember';break;
+          }
+
+          return bulan;
         }
 
     </script>
