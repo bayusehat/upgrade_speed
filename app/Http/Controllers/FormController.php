@@ -68,6 +68,10 @@ class FormController extends Controller
                 $insert = DB::table('upspeed_new')->insert($data);
 
                 if($insert){
+                    //Update Valid 
+                    DB::table('upspeed_master')->where('nd_internet',$request->input('nomor_inet'))->update([
+                        'up_valid' => 1
+                    ]);
                     return redirect()->back()->with('success','Pendaftaran berhasil!');
                 }else{
                     return redirect()->back()->with('error','Terjadi kesalahan! pendaftaran gagal!');
