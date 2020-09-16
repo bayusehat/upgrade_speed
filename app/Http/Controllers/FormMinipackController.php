@@ -10,13 +10,6 @@ class FormMinipackController extends Controller
 {
     public function index()
     {
-        // $get = DB::select("SELECT DISTINCT TRIM(SPEED) SPEED FROM MP_MASTER WHERE SPEED LIKE '%M%' ORDER BY SPEED ASC");
-        // $data = [
-        //     'title' => 'Minipack',
-        //     'speed' => $get
-        // ];
-
-        // return view('form',$data);
         return view('form_minipack');
     }
 
