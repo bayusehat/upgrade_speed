@@ -50,13 +50,14 @@ class OplangController extends Controller
 
     public function edit($id)
     {
-        $query = DB::select("SELECT A.*,B.USERNAME,c.AREA, D.PENAWARAN
+        $query = DB::select("SELECT A.*,B.USERNAME,c.AREA, D.PENAWARAN, D.PRICE + COALESCE(G.PRICE,0) -  F.ABONEMEN PEN_HARGA, D.PRICE PAKET_TARIF, F.ABONEMEN, F.TAGIHAN, F.TAGIHAN + ROUND((D.PRICE + COALESCE(G.PRICE,0) -  F.ABONEMEN) * 1.1,0) ESTIMASI, G.ADDON, COALESCE(G.PRICE,0) HARGA_ADDON
         FROM UPSPEED_NEW A 
          LEFT JOIN USERS B ON A.USER_OPLANG = B.ID 
          LEFT JOIN AREAS C ON A.CWITEL = C.CWITEL
          LEFT JOIN UPSPEED_MASTER F ON A.NOMOR_INET = F.ND_INTERNET
          LEFT JOIN OFFERS D ON F.OFFER_ID = D.ID
          LEFT JOIN SPEEDS E ON D.SPEED_ID = E.ID
+         LEFT JOIN ADDONS G ON F.ADDON_ID = G.ID
        WHERE ID_UPSPEED = $id");
         $data = [
             'title' => 'Edit Oplang',

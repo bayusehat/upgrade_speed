@@ -32,13 +32,13 @@ class FormController extends Controller
         ];
 
         $message = [
-            'nomor_hp.required' => 'Field nomor hp harus diisi!',
-            'nomor_inet.required' => 'Field nomor tidak boleh kosong!',
-            'nama_pelanggan.required' => 'Field nama pelanggan tidak boleh kosong!',
+            'nomor_hp.required'        => 'Field nomor hp harus diisi!',
+            'nomor_inet.required'      => 'Field nomor tidak boleh kosong!',
+            'nama_pelanggan.required'  => 'Field nama pelanggan tidak boleh kosong!',
             'email_pelanggan.required' => 'Field email pelanggan tidak boleh kosong!',
-            'cur_speed.required' => 'Field kecepatan saat ini tidak boleh kosong!',
-            'up_to_speed.required' => 'Field upgrade kecepatan harus diisi!',
-            'disclaimer.required' => 'Field disclaimer harus diisi!'
+            'cur_speed.required'       => 'Field kecepatan saat ini tidak boleh kosong!',
+            'up_to_speed.required'     => 'Field upgrade kecepatan harus diisi!',
+            'disclaimer.required'      => 'Field disclaimer harus diisi!'
         ];
 
         $isValid = Validator::make($request->all(),$rules,$message);

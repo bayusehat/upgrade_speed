@@ -60,6 +60,10 @@
                                     <input type="text" class="form-control form-control-sm border-bottom" value="{{ $data[0]->cur_speed }}" disabled>
                                 </div>
                                 <div class="form-group">
+                                    <label for="nd_pots"><strong>HARGA PAKET CURRENT:</strong></label>
+                                    <input type="text" class="form-control form-control-sm border-bottom" value="{{ number_format($data[0]->abonemen) }}" disabled>
+                                </div>
+                                <div class="form-group">
                                     <label for="nd_pots"><strong>UP TO SPEED :</strong></label>
                                     <input type="text" class="form-control form-control-sm border-bottom" value="{{ $data[0]->up_to_speed }}" disabled>
                                 </div>
@@ -68,8 +72,16 @@
                                     <input type="text" class="form-control form-control-sm border-bottom" value="{{ $data[0]->penawaran }}" disabled>
                                 </div>
                                 <div class="form-group">
+                                    <label for="nd_pots"><strong>HARGA PAKET UP:</strong></label>
+                                    <input type="text" class="form-control form-control-sm border-bottom" value="{{ number_format($data[0]->paket_tarif) }}" disabled>
+                                </div>
+                                <div class="form-group">
                                     <label for="nd_pots"><strong>PENAMBAHAN HARGA :</strong></label>
-                                    <input type="text" class="form-control form-control-sm border-bottom" value="{{ $data[0]->price }}" disabled>
+                                    <input type="text" class="form-control form-control-sm border-bottom" value="{{ number_format($data[0]->price) }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nd_pots"><strong>ADDON :</strong></label>
+                                    <input type="text" class="form-control form-control-sm border-bottom" value="{{ $data[0]->addon }}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="nd_pots"><strong>KCONTACT :</strong></label>
