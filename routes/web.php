@@ -41,5 +41,7 @@ Route::group(['middleware' => ['authlogin','web']],function(){
     Route::get('/oplang/load','OplangController@loadData');
     Route::get('/oplang/edit/{id}','OplangController@edit');
     Route::post('/oplang/update/{id}','OplangController@update');
+    
+    Route::get('/load_report','ReportController@getReport');
 });
-
+Route::get('/report_witel','ReportController@index');

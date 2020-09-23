@@ -59,6 +59,11 @@
             <i class="fas fa-fw fa-table"></i>
             <span>OPLANG</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('report_witel') }}">
+            <i class="fas fa-fw fa-file"></i>
+            <span>REPORT WITEL</span></a>
+        </li>
         @endif
         {{-- @if (session('profil') == 4)
 
