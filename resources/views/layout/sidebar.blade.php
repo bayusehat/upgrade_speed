@@ -302,9 +302,10 @@
       <script>
         $(document).ready(function(){
           loadNotif();
-          setTimeout(function(){
+          setInterval(function(){
             loadNotif()
-          },500000)
+            console.log('Loaded ...')
+          },5000000)
         })
           function loadNotif(){  
             $.ajax({
@@ -313,7 +314,6 @@
               dataType : 'JSON',
               success:function(res){
                 var html = '';
-                // $.notifyClose();
                 $("#jumlah_notif").html(res.jumlah_notif);
                 $.each(res.notification,function(i,val){
                  html += '<a class="dropdown-item d-flex align-items-center" href="#">'+
@@ -328,6 +328,7 @@
                           '</a>';
                   });
                   $("#notif").html(html);
+                  notifyClose();
                   notif(res.jumlah_notif+" WO belum dikerjakan");
               }
             })

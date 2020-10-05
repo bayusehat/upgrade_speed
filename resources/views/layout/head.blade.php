@@ -65,6 +65,13 @@
                 position : 'top center'
             });
         }
+
+        function notifyClose(){
+            $.notify("",{
+                clickToHide: true,
+                autoHide: true,
+            });
+        }
     </script>
     <style>
         #dataTable td{
