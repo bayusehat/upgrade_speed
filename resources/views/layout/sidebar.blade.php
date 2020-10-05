@@ -259,7 +259,7 @@
                       <div class="small text-gray-500">Chicken the Dog · 2w</div>
                     </div>
                   </a> --}}
-                  <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                  <a class="dropdown-item text-center small text-gray-500" href="{{ url("oplang") }}">Read More Messages</a>
                 </div>
               </li>
   
@@ -302,6 +302,9 @@
       <script>
         $(document).ready(function(){
           loadNotif();
+          setTimeout(function(){
+            loadNotif()
+          },500000)
         })
           function loadNotif(){  
             $.ajax({
@@ -310,20 +313,22 @@
               dataType : 'JSON',
               success:function(res){
                 var html = '';
+                // $.notifyClose();
                 $("#jumlah_notif").html(res.jumlah_notif);
                 $.each(res.notification,function(i,val){
                  html += '<a class="dropdown-item d-flex align-items-center" href="#">'+
                             '<div class="dropdown-list-image mr-3">'+
-                                '<img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">'+
+                                '<img class="rounded-circle" src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png" alt="">'+
                                 '<div class="status-indicator bg-success"></div>'+
                                 '</div>'+
                               '<div class="font-weight-bold">'+
-                                '<div class="text-truncate">Notifikasi baru dari '+val.nama_pelanggan+' - '+val.nomor_inet+'</div>'+
-                                '<div class="small text-gray-500">Emily Fowler · 58m</div>'+
+                                '<div class="text-truncate">WO ID :  '+val.id_upspeed+' - '+val.nomor_inet+'</div>'+
+                                '<div class="small text-gray-500">'+val.nama_pelanggan+' ·</div>'+
                             '</div>'+
                           '</a>';
                   });
                   $("#notif").html(html);
+                  notif(res.jumlah_notif+" WO belum dikerjakan");
               }
             })
           }

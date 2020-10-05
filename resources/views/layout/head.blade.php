@@ -45,6 +45,7 @@
     <script src="{{ asset('backend/js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('backend/jquery-ui.js') }}"></script>
     <script src="{{ asset('backend/jquery.loading.js') }}"></script>
+    <script src="{{ asset('backend/notify.js') }}"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script>
@@ -55,6 +56,15 @@
             $('.select2').select2();
             $('.datepicker' ).datepicker({ dateFormat: 'yy-mm-dd' });
         });
+
+        function notif(text){
+            $.notify(text,{
+                clickToHide: true,
+                autoHide: false,
+                className: 'info',
+                position : 'top center'
+            });
+        }
     </script>
     <style>
         #dataTable td{
