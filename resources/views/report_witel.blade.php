@@ -27,6 +27,19 @@
                 </button>
             </div>
         @endif
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInput">Tanggal Report</label>
+                        <input type="text" class="form-control mb-2 datepicker" id="tgl_report" name="tgl_report" placeholder="Tanggal Report">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-primary" onclick="loadData()"><i class="fa fa-search"></i> Reload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -67,6 +80,7 @@
     });
 
     function loadData(){
+        var tgl_report = $("#tgl_report").val();
         $('#dataTable').DataTable({
             footerCallback: function ( row, data, start, end, display ) {
                 var api = this.api(), data;
@@ -124,12 +138,9 @@
                     .column(8)
                     .data();
 
-                var sum_ach = 0;
-                $.each(ach_d,function(i,val){
-                    sum_ach += parseFloat(val);
-                });
-                var sum_total_ach = sum_ach.toFixed(2);
-
+                var ach = agree / parseFloat(dapros) * 100;
+                var sum_total_ach = ach.toFixed(2);
+                
                 $( api.column( 2 ).footer() ).html(numberFormat(dapros));
                 $( api.column( 3 ).footer() ).html(numberFormat(agree));
                 $( api.column( 4 ).footer() ).html(numberFormat(belum_input));
@@ -142,7 +153,7 @@
             processing: true, 
             destroy: true,
             ajax: {
-                url: "{{ url('load_report') }}",
+                url: "{{ url('load_report') }}?tgl_report="+tgl_report,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

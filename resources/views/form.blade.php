@@ -250,7 +250,7 @@
 
                 @csrf
 
-                <div class="p-3 p-lg-5 border">
+                <div class="p-3 p-lg-5 border" id="form-contain">
 
                     @if(session('success'))
 
@@ -549,7 +549,10 @@
       </div>
 
     </div>
-
+    <link href="{{ asset('backend/jquery-ui.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/loading.css') }}" rel="stylesheet">
+    <script src="{{ asset('backend/jquery-ui.js') }}"></script>
+    <script src="{{ asset('backend/jquery.loading.js') }}"></script>
     <script type="text/javascript">
 
         function numberFormat(nStr) {
@@ -590,12 +593,12 @@
                         'nomor_hp' : nomor_hp
 
                     },
-                    // beforeSend:function(){
-                    //     $('body').loading();
-                    // },
-                    // complete:function(){
-                    //     $('body').loading('stop');
-                    // },
+                    beforeSend:function(){
+                        $('body').loading();
+                    },
+                    complete:function(){
+                        $('body').loading('stop');
+                    },
                     success:function(res){
 
                         if(res.status == 200){
@@ -619,6 +622,19 @@
                         }else{
 
                             alert(res.message);
+                            $('#nama_pelanggan').val('')
+                            $('#nomor_inet').val('')
+                            $('#cur_speed').val('')
+                            $('#price').val('')
+                            $('#price_sep').html('')
+                            $("#cwitel").val('')
+                            $('#up_to_speed').val('')
+                            $('#tag_bln_ini').val('')
+                            $('#tag_bln_ini_sep').html('')
+                            $("#estimasi_tag").val('')
+                            $("#estimasi_tag_sep").html('')
+                            $("#nama_paket").val('')
+                            $("#bulan_tagihan").html('')
 
                         }
 

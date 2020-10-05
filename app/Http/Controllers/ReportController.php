@@ -16,8 +16,14 @@ class ReportController extends Controller
 
         return view('layout.index',['data' => $data]);
     }
-    public function getReport()
+    public function getReport(Request $request)
     {
+        $tgl = $request->input('tgl_report');
+        if($tgl){
+            $tgl_report = "Y.CREATED::TEXT LIKE '%$tgl%'";
+        }else{
+            $tgl_report = "1=1";
+        }
         $response['data'] = [];
         $query = DB::select("
         SELECT X.AREA,
@@ -38,6 +44,7 @@ class ReportController extends Controller
             LEFT JOIN SPEEDS C ON B.SPEED_ID = C.ID) X
         LEFT JOIN 
         UPSPEED_NEW Y ON X.HP = Y.NOMOR_HP
+        WHERE $tgl_report
         GROUP BY X.AREA
         ORDER BY X.AREA
         ");

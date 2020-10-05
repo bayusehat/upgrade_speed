@@ -45,3 +45,4 @@ Route::group(['middleware' => ['authlogin','web']],function(){
     Route::get('/load_report','ReportController@getReport');
 });
 Route::get('/report_witel','ReportController@index');
+Route::get('/notif','NotificationController@getNotification');
