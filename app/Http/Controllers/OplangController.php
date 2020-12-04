@@ -83,13 +83,14 @@ class OplangController extends Controller
                 'status_oplang' => $request->input('status_oplang'),
                 'user_oplang' => session('id_user'),
                 'keterangan_oplang' => $request->input('keterangan_oplang'),
-                'created_oplang' => date('Y-m-d H:i:s')
+                'created_oplang' => date('Y-m-d H:i:s'),
+                'flag_see' => 1
             ];
 
             $update = DB::table('upspeed_new')->where('id_upspeed',$id)->update($data);
 
             if($update){
-                return redirect()->back()->with('success','Berhasil memperbarui status dapros oleh Oplang');
+                return redirect('oplang')->with('success','Berhasil memperbarui status dapros oleh Oplang');
             }else{
                 return redirect()->back()->with('error','Gagal memperbarui status');
             }

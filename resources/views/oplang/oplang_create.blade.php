@@ -5,6 +5,53 @@
         padding: 0;
     }
 </style>
+@php
+    $witel = $data[0]->area;
+    switch ($witel) {
+        case 'DENPASAR':
+            $kode = 'SPKRI05';
+            break;
+        case 'JEMBER':
+            $kode = 'SPXRI88';
+            break;
+        case 'KEDIRI':
+            $kode = 'SPXRI88';
+            break;
+        case 'MALANG':
+            $kode = 'SPXRI88';
+            break;
+        case 'PASURUAN':
+            $kode = 'SPXRI88';
+            break;
+        case 'MADIUN':
+            $kode = 'SPXRI88';
+            break;
+        case 'SURABAYA UTARA':
+            $kode = 'SPXTH01';
+            break;
+        case 'SURABAYA SELATAN':
+            $kode = 'SPXTH01';
+            break;
+        case 'SIDOARJO':
+            $kode = 'SPXTH01';
+            break;
+        case 'MADURA':
+            $kode = 'SPXTH01';
+            break;
+        case 'NTT':
+            $kode = 'SPXHY01';
+            break;
+        case 'SINGARAJA':
+            $kode = 'SPXHY01';
+            break;
+        case 'NTB':
+            $kode = 'SPXRC01';
+            break;
+        default:
+            # code...
+            break;
+    }
+@endphp
 <h1 class="h3 mb-2 text-gray-800">Update Data WO Oplang</h1>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -85,7 +132,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nd_pots"><strong>KCONTACT :</strong></label>
-                                    <textarea name="kcontact" id="kcontact" cols="30" rows="10" class="form-control" disabled>{{ $data[0]->kcontact }}</textarea>
+                                    <textarea name="kcontact" id="kcontact" cols="30" rows="10" class="form-control" disabled>AOSF;{{$kode}};{{ $data[0]->nama_pelanggan.';'.$data[0]->nomor_hp.';'.$data[0]->up_to_speed.';selisih '.$data[0]->pen_harga }}
+                                    @php
+                                        \DB::table('upspeed_new')->where('id_upspeed',$data[0]->id_upspeed)->update([
+                                            'kcontact' => 'AOSF;'.$kode.';'.$data[0]->nama_pelanggan.';'.$data[0]->nomor_hp.';'.$data[0]->up_to_speed.';selisih '.$data[0]->pen_harga
+                                        ]);
+                                    @endphp
+                                    </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="nd_pots"><strong>WITEL :</strong></label>

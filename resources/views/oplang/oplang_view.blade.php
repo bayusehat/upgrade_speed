@@ -68,7 +68,7 @@
                 { name: 'created' },
                 { name: 'action', searchable: false, orderable: false, className: 'text-center' }
             ],
-            order: [[0, 'asc']],
+            order: [[4, 'desc']],
             iDisplayInLength: 10 
         });
     }
