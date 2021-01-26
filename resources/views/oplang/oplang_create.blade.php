@@ -132,7 +132,6 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nd_pots"><strong>KCONTACT :</strong></label>
-<<<<<<< HEAD
                                     <textarea name="kcontact" id="kcontact" cols="30" rows="10" class="form-control" disabled>AOSF;{{$kode}};DIGITAL;{{ $data[0]->nama_pelanggan.';'.$data[0]->nomor_hp.';'.$data[0]->up_to_speed.';selisih '.$data[0]->pen_harga }}
                                     @php
                                         \DB::table('upspeed_new')->where('id_upspeed',$data[0]->id_upspeed)->update([
@@ -140,9 +139,6 @@
                                         ]);
                                     @endphp
                                     </textarea>
-=======
-                                    <textarea name="kcontact" id="kcontact" cols="30" rows="10" class="form-control" disabled>AOSF;SPXTH01;{{ $data[0]->nama_pelanggan.';'.$data[0]->nomor_hp.';'.$data[0]->up_to_speed.';selisih '.$data[0]->pen_harga }}</textarea>
->>>>>>> 4b62c2e2aa27408088bdceef787c9632ec5c8672
                                 </div>
                                 <div class="form-group">
                                     <label for="nd_pots"><strong>WITEL :</strong></label>
