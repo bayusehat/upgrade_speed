@@ -50,6 +50,8 @@ class LoginController extends Controller
                             return redirect('/oplang');
                         }else if(session('profil') == 'OBC'){
                             return redirect('/obc');
+                        }else{
+                            return redirect('/oplang');
                         }
                     }else{
                         return redirect()->back()->with('error','Password yang anda masukkan salah!');
@@ -69,5 +71,26 @@ class LoginController extends Controller
         session()->forget('token');
         session()->save();
         return redirect('/login');
+    }
+
+    public function create_admin()
+    {
+        $data = [
+            'username' => 'admin',
+            'password' => Hash::make('admin123'),
+            'cwitel' => 1005,
+            'profile_id' => 1,
+            'is_active' => 1,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        $insert = DB::table('users')->insert($data);
+        
+        if($insert){
+            echo 'Sukses';
+        }else{
+            echo 'Gagal';
+        }
     }
 }

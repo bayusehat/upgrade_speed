@@ -40,7 +40,7 @@
             <span>CTB Menu</span></a>
         </li>
         @endif --}}
-        @if (session('profil') == 'OBC')
+        @if (session('profil') == 'OBC' || session('profil') == "ADMIN")
         <!-- Nav Item - Tables -->
         <li class="nav-item">
           <a class="nav-link" href="{{ url('obc') }}">
@@ -53,7 +53,7 @@
             <span>Indihome Prepaid</span></a>
         </li> --}}
         @endif
-        @if (session('profil') == "OPLANG")
+        @if (session('profil') == "OPLANG" || session('profil') == "ADMIN")
         <li class="nav-item">
           <a class="nav-link" href="{{ url('oplang') }}">
             <i class="fas fa-fw fa-table"></i>
